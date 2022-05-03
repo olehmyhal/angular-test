@@ -1,0 +1,48 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+      <form [formGroup]="customForm" (ngSubmit)="onSubmit()">
+        <div>
+          <label for="name">Project Name</label>
+          <input 
+            id="name"
+            type="text"
+            formControlName="projectName"
+          />
+          <p *ngIf="customForm.get('projectName').errors?.required && customForm.get('projectName').touched">Name is required!</p>
+          <p *ngIf="customForm.get('projectName').errors?.nameIsForbidden">Forbidden name</p>
+        </div>
+        <div>
+          <label for="email">Email</label>
+          <input 
+            id="email"
+            type="email"
+            formControlName="email"
+          />
+          <p *ngIf="!customForm.get('email').valid && customForm.get('email').touched">Error in email!</p>
+        </div>
+        <div>
+          <label>Project Status</label>
+          <select formControlName="projectStatus">
+            <option *ngFor="let option of arrayOptions" [value]="option.toLowerCase()">{{ option }}</option>
+          </select>
+          <p *ngIf="customForm.get('projectStatus').errors?.required && customForm.get('projectStatus').touched">Project is required!</p>
+        </div>
+        <button type="submit">Submit</button>
+      </form>
+      <!--
+          Create a Form with the following Controls and Validators
+          1) Project Name (should not be empty)
+          2) Mail (should not be a empty and a valid email)
+          3) Project Status Dropdown, with three values: 'Stable', 'Critical', 'Finished'
+          4) Submit Button
+
+          Add your own Validator which doesn't allow "Test" as a Project Name
+
+          Also implement that Validator as an async Validator (replace the other one)
+
+          Upon submitting the form, simply print the value to the console
+      -->
+    </div>
+  </div>
+</div>

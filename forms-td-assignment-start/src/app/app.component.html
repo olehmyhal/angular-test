@@ -1,0 +1,66 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+      <form (ngSubmit)="submitForm()" #f="ngForm">
+        <div>
+          <label for="email">Email</label>
+          <input 
+            type="email"
+            id="email"
+            name="email"
+            ngModel
+            email
+            required
+            #email="ngModel"
+          />
+          <p *ngIf="!email.valid && email.touched">Email error!</p>
+        </div>
+        <div>
+          <label for="subscription">Subscription</label>
+          <select 
+            id="subscription"
+            name="subscription"
+            ngModel="advanced"
+            required
+            #subscription="ngModel"
+          >
+            <option value="basic">Basic</option>
+            <option value="advanced">Advanced</option>
+            <option value="pro">Pro</option>
+          </select>
+          <div *ngIf="!subscription.valid && subscription.touched">Error in subscription!</div>
+        </div>
+        <div>
+          <label for="password">Password</label>
+          <input 
+            type="email"
+            id="password"
+            name="password"
+            ngModel
+            required
+            #password="ngModel"
+          />
+          <div *ngIf="!password.valid && password.touched">Password error!</div>
+        </div>
+        <button type="submit" [disabled]="!f.valid">Submit</button>
+      </form>
+      <div *ngIf="formSubmitted">
+        <div>Email: {{ formData.email }}</div>
+        <div>Subscription: {{ formData.subscription }}</div>
+        <div>Password: {{ formData.password }}</div>
+      </div>
+      <!-- Add a Form with the following Inputs (and Validators)
+           1) Mail address (should not be empty and should be an email address)
+           2) A Dropdown which allows the user to select from three different Subscriptions ("Basic", "Advanced", "Pro")
+              Set "Advanced" as Default
+           3) A Password field (should not be empty)
+           4) A Submit Button
+
+           Display a warning message if the Form is invalid AND was touched. Display a warning message below each input if it's invalid.
+
+           Upon submitting the form, you should simply print the Value of the Form to the Console.
+           Optionally, display it in your template.
+      -->
+    </div>
+  </div>
+</div>
